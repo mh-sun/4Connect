@@ -9,9 +9,12 @@ userPiece=1
 AIPiece=-1
 
 def colomnChecker(board,userChoise):
-    if(board[row_number-1][userChoise]==0):
-        return True
-    else:return False
+    if(userChoise>=0 and userChoise <=7):
+        if (board[row_number - 1][userChoise] == 0):
+            return True
+        else:
+            return False
+    else: return False
 
 def printBoard(board):
     tempboard=numpy.zeros((row_number,colomn_number))
@@ -30,7 +33,7 @@ while not game_over:
                 if(board[i][userChoise]==0):
                     board[i][userChoise]=userPiece
                     break
-        else:pass
+        else:continue
 
         flip=False
     else:
@@ -40,6 +43,7 @@ while not game_over:
                 if (board[i][userChoise] == 0):
                     board[i][userChoise] = AIPiece
                     break
+        else:continue
 
         flip =True
     printBoard(board)
