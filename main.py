@@ -3,8 +3,8 @@ import pygame
 import sys
 import math
 
-BLUE = (0, 0, 139)
-WHITE = (150, 150, 150)
+BLUE = (135, 206, 235)
+WHITE = (0, 0, 0)
 RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
 
@@ -27,7 +27,7 @@ def columnChecker (board, userChoise):
 
 
 def printBoard(board):
-    print(numpy.flip(board,0))
+    print(numpy.flip(board, 0))
 
 
 printBoard(board)
