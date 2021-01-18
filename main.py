@@ -2,6 +2,7 @@ import numpy
 import pygame
 import sys
 import math
+import random
 
 BLUE = (135, 206, 235)
 WHITE = (0, 0, 0)
@@ -131,35 +132,38 @@ while not game_over:
 
                 flip = False
 
+                tempBoard = numpy.flip(board, 0)
+                draw_board(tempBoard)
+                printBoard(board)
 
+        if not flip and not game_over:
+            userChoise= random.randrange(0,7)
+            print("userChoice : ",userChoise)
+            if columnChecker(board, userChoise):
+                pygame.time.wait(500)
+                for i in range(6):
+                    if board[i][userChoise] == 0:
+                        board[i][userChoise] = AIPiece
+                        break
             else:
-                posx = event.pos[0]
-                userChoise = int(math.floor(posx/SQUARESIZE))
-                print("userChoice : ",userChoise)
-                if columnChecker(board, userChoise):
-                    for i in range(6):
-                        if board[i][userChoise] == 0:
-                            board[i][userChoise] = AIPiece
-                            break
-                else:
-                    continue
-                if winCheck(board, -1):
-                    label = gameFont.render("Player 2 Win!!", 1, YELLOW)
-                    screen.blit(label, (40, 10))
-                    game_over = True
+                continue
+            if winCheck(board, -1):
+                label = gameFont.render("Player 2 Win!!", 1, YELLOW)
+                screen.blit(label, (40, 10))
+                game_over = True
 
-                elif checkDraw(board):
-                    label = gameFont.render("Draw!!", 1, BLUE)
-                    screen.blit(label, (40, 10))
-                    game_over = True
+            elif checkDraw(board):
+                label = gameFont.render("Draw!!", 1, BLUE)
+                screen.blit(label, (40, 10))
+                game_over = True
 
-                flip = True
+            flip = True
 
             tempBoard = numpy.flip(board, 0)
             draw_board(tempBoard)
             printBoard(board)
 
-            if game_over:
-                pygame.time.wait(5000)
+    if game_over:
+        pygame.time.wait(5000)
 
 
