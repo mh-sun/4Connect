@@ -89,12 +89,14 @@ def evaluate_window(window, piece):
     if piece == userPiece:
         opponent = AIPiece
     if window.count(piece) == 4:
-        score += 200
+        score += 10000
     elif window.count(piece) == 3 and window.count(EMPTY) == 1:
         score += 10
     elif window.count(piece) == 2 and window.count(EMPTY) == 2:
         score += 4
-    if window.count(opponent) == 3 and window.count(EMPTY) == 1:
+    if window.count(opponent) == 4:
+        score -= 9000
+    elif window.count(opponent) == 3 and window.count(EMPTY) == 1:
         score -= 8
 
     return score
@@ -141,15 +143,7 @@ def minimax(board, depth, alpha, beta, maximizing_value):
     valid_column = get_column_number(board)
     is_leaf = is_leaf_node(board)
     if depth == 0 or is_leaf:
-        if is_leaf:
-            if winCheck(board, AIPiece):
-                return None, 100000000000000
-            elif winCheck(board, userPiece):
-                return None, -100000000000000
-            else:
-                return None, 0
-        else:
-            return None, score_position(board, AIPiece)
+        return None, score_position(board, AIPiece)
 
     if maximizing_value:
         value = -math.inf
@@ -182,24 +176,6 @@ def minimax(board, depth, alpha, beta, maximizing_value):
             if alpha >= beta:
                 break
         return column, value
-
-
-def best_move(board, piece):
-    valid_column = get_column_number(board)
-    best_score = -1000000
-    best_column = random.choice(valid_column)
-    for column in valid_column:
-        row = get_row_number(board, column)
-        # print("column:", column, " row:", row)
-        temp_board = board.copy()
-        temp_board[row][column] = piece
-        score = score_position(temp_board, piece)
-        print("column: ", column, " score: ", score)
-        if score > best_score:
-            best_score = score
-            best_column = column
-
-    return best_column
 
 
 SQUARE_SIZE = 100
@@ -266,7 +242,7 @@ while not game_over:
                 else: continue
 
                 if winCheck(board, 1):
-                    label = gameFont.render("Player 1 Win!!", 1, RED)
+                    label = gameFont.render("Player Win!!", 1, RED)
                     screen.blit(label, (40, 10))
                     game_over = True
 
@@ -295,7 +271,7 @@ while not game_over:
             continue
 
         if winCheck(board, -1):
-            label = gameFont.render("Player 2 Win!!", 1, YELLOW)
+            label = gameFont.render("AI Win!!", 1, YELLOW)
             screen.blit(label, (40, 10))
             game_over = True
 
