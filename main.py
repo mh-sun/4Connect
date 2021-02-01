@@ -287,7 +287,7 @@ while not game_over:
         printBoard(board)
 
     if game_over:
-        pygame.time.wait(3000)
+        pygame.time.wait(20000)
 
 
 
