@@ -89,13 +89,13 @@ def evaluate_window(window, piece):
     if piece == userPiece:
         opponent = AIPiece
     if window.count(piece) == 4:
-        score += 10000
+        score += 1000000
     elif window.count(piece) == 3 and window.count(EMPTY) == 1:
         score += 10
     elif window.count(piece) == 2 and window.count(EMPTY) == 2:
         score += 4
     if window.count(opponent) == 4:
-        score -= 9000
+        score -= 100000
     elif window.count(opponent) == 3 and window.count(EMPTY) == 1:
         score -= 8
 
