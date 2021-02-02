@@ -32,6 +32,7 @@ font = pygame.font.SysFont('Constantia', 30)
 clicked = False
 
 
+# this button class is made help of that link:https://github.com/russs123/pygame_button/blob/main/button.py
 class Button:
 
     # colours for button and text
@@ -452,10 +453,9 @@ while not game_over:
         printBoard(board)
 
     pygame.display.update()
-
     if game_over:
-        pygame.time.wait(20000)
-
+        pygame.time.wait(3000)
+        sys.exit()
 
 # Two player game
 while not game_over_2:
@@ -543,6 +543,7 @@ while not game_over_2:
 
     if game_over_2:
         pygame.time.wait(3000)
+        sys.exit()
 
 
 
